@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Register — Weekend Yoga Workshop · Inner Peak</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream:  #faf6f0;
+    --cream2: #f3ede3;
+    --brown:  #5c2d0a;
+    --amber:  #c97d2e;
+    --muted:  #7a5c40;
+    --text:   #3a2010;
+    --green:  #4a7c4e;
+  }
+
+  html, body {
+    min-height: 100vh;
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream2);
+    color: var(--text);
+  }
+
+  body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+  }
+
+  .card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 16px 60px rgba(92,45,10,0.12);
+    width: 100%;
+    max-width: 520px;
+    overflow: hidden;
+  }
+
+  /* Header band */
+  .card-header {
+    background: var(--brown);
+    padding: 36px 44px 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    text-align: center;
+  }
+  .card-header img {
+    height: 64px;
+    filter: brightness(0) invert(1);
+  }
+  .header-divider {
+    width: 40px; height: 1px;
+    background: rgba(255,255,255,0.3);
+  }
+  .card-header h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 30px; font-weight: 300;
+    color: white; line-height: 1.2;
+  }
+  .card-header h1 em {
+    font-style: italic; color: #e8a84c;
+  }
+
+  /* Schedule strip */
+  .schedule-strip {
+    background: var(--amber);
+    padding: 12px 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .strip-item {
+    display: flex; align-items: center; gap: 7px;
+    font-size: 13px; font-weight: 500; color: white;
+    letter-spacing: 0.04em;
+  }
+  .strip-item svg { width: 15px; height: 15px; fill: rgba(255,255,255,0.8); flex-shrink:0; }
+  .strip-dot {
+    width: 4px; height: 4px; border-radius: 50%;
+    background: rgba(255,255,255,0.5);
+  }
+
+  /* Form body */
+  .card-body { padding: 40px 44px 44px; }
+
+  .form-group { margin-bottom: 20px; }
+  .form-group label {
+    display: block;
+    font-size: 11px; font-weight: 500;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 7px;
+  }
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    width: 100%;
+    padding: 13px 16px;
+    border: 1.5px solid rgba(92,45,10,0.15);
+    border-radius: 4px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px; color: var(--text);
+    background: var(--cream);
+    transition: border-color 0.2s, box-shadow 0.2s;
+    outline: none;
+    -webkit-appearance: none;
+  }
+  .form-group input:focus,
+  .form-group textarea:focus,
+  .form-group select:focus {
+    border-color: var(--amber);
+    box-shadow: 0 0 0 3px rgba(201,125,46,0.12);
+    background: white;
+  }
+  .form-group textarea {
+    resize: vertical; min-height: 96px; line-height: 1.55;
+  }
+  .form-group .hint {
+    font-size: 12px; color: var(--muted); margin-top: 5px;
+    line-height: 1.4;
+  }
+
+  .required-star { color: var(--amber); }
+
+  .form-submit {
+    width: 100%; padding: 16px;
+    background: var(--brown); color: white;
+    border: none; border-radius: 4px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px; font-weight: 500;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    cursor: pointer; margin-top: 8px;
+    transition: background 0.2s, transform 0.1s;
+  }
+  .form-submit:hover { background: var(--amber); }
+  .form-submit:active { transform: scale(0.99); }
+
+  .whatsapp-note {
+    margin-top: 16px;
+    display: flex; align-items: flex-start; gap: 10px;
+    background: #f0f9f1;
+    border: 1px solid #b8debb;
+    border-radius: 4px;
+    padding: 12px 14px;
+    font-size: 13px; color: #2e6b33;
+    line-height: 1.45;
+  }
+  .whatsapp-note svg { width: 18px; height: 18px; fill: #4a7c4e; flex-shrink: 0; margin-top: 1px; }
+
+  /* Success state */
+  .form-success {
+    display: none;
+    flex-direction: column; align-items: center;
+    text-align: center; padding: 16px 0 8px;
+    gap: 14px;
+  }
+  .form-success.visible { display: flex; }
+  .success-icon {
+    width: 68px; height: 68px; border-radius: 50%;
+    background: var(--green);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .success-icon svg { width: 34px; height: 34px; fill: white; }
+  .success-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 30px; font-weight: 400; color: var(--brown);
+  }
+  .success-body {
+    font-size: 15px; color: var(--muted);
+    max-width: 320px; line-height: 1.6;
+  }
+  .success-next {
+    background: var(--cream2);
+    border-radius: 4px;
+    padding: 18px 20px;
+    width: 100%;
+    text-align: left;
+    font-size: 14px; color: var(--text);
+    line-height: 1.6;
+  }
+  .success-next strong { color: var(--brown); display: block; margin-bottom: 6px; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; }
+
+  /* Footer */
+  .card-footer {
+    border-top: 1px solid rgba(92,45,10,0.08);
+    padding: 18px 44px;
+    display: flex; align-items: center; justify-content: center; gap: 6px;
+    font-size: 13px; color: var(--muted);
+  }
+  .card-footer a { color: var(--amber); text-decoration: none; }
+  .card-footer a:hover { text-decoration: underline; }
+
+  @media (max-width: 480px) {
+    body { padding: 0; align-items: flex-start; }
+    .card { border-radius: 0; box-shadow: none; min-height: 100vh; }
+    .card-header, .card-body, .card-footer { padding-left: 24px; padding-right: 24px; }
+    .schedule-strip { padding: 12px 24px; gap: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="card">
+
+  <div class="card-header">
+    <img src="innerpeak_logo.png" alt="Inner Peak">
+    <div class="header-divider"></div>
+    <h1>Weekend Yoga<br><em>Workshop</em></h1>
+  </div>
+
+  <div class="schedule-strip">
+    <div class="strip-item">
+      <svg viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11z"/></svg>
+      Saturday &amp; Sunday
+    </div>
+    <div class="strip-dot"></div>
+    <div class="strip-item">
+      <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67V7z"/></svg>
+      4:30 – 5:30 PM
+    </div>
+    <div class="strip-dot"></div>
+    <div class="strip-item">
+      <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+      Reckon Studio
+    </div>
+  </div>
+
+  <div class="card-body">
+
+    <form id="regForm">
+      <div class="form-group">
+        <label for="name">Full Name <span class="required-star">*</span></label>
+        <input type="text" id="name" placeholder="Your full name" required autocomplete="name">
+      </div>
+
+      <div class="form-group">
+        <label for="whatsapp">WhatsApp Number <span class="required-star">*</span></label>
+        <input type="tel" id="whatsapp" placeholder="+91 XXXXX XXXXX" required autocomplete="tel">
+        <div class="hint">We'll send your confirmation &amp; session details here</div>
+      </div>
+
+      <div class="form-group">
+        <label for="ailments">Any Ailments or Health Conditions</label>
+        <textarea id="ailments" placeholder="Please mention any injuries, medical conditions, or health concerns. Write 'None' if not applicable."></textarea>
+        <div class="hint">Helps us ensure the session is safe and suitable for you</div>
+      </div>
+
+      <button type="submit" class="form-submit">Register for the Workshop</button>
+
+      <div class="whatsapp-note">
+        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.126.557 4.121 1.532 5.855L.054 23.454l5.741-1.505A11.943 11.943 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.891 0-3.66-.522-5.174-1.43l-.371-.221-3.407.894.909-3.32-.242-.383A9.96 9.96 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+        After registering, complete your payment and send the screenshot to our WhatsApp to confirm your seat.
+      </div>
+    </form>
+
+    <div class="form-success" id="formSuccess">
+      <div class="success-icon">
+        <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+      </div>
+      <div class="success-title">You're registered!</div>
+      <div class="success-body">Thank you for signing up. We'll reach out on WhatsApp shortly with all session details.</div>
+      <div class="success-next">
+        <strong>Next Step</strong>
+        Complete your payment and send the confirmation screenshot to <a href="https://wa.me/918431568065" style="color:var(--green);font-weight:500">+91 84315 68065</a> on WhatsApp to lock in your spot.
+      </div>
+    </div>
+
+  </div>
+
+  <div class="card-footer">
+    Questions? Call or WhatsApp &nbsp;<a href="tel:+918431568065">+91 84315 68065</a>
+  </div>
+
+</div>
+
+<script>
+  document.getElementById('regForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    this.style.display = 'none';
+    document.getElementById('formSuccess').classList.add('visible');
+  });
+</script>
+
+</body>
+</html>
